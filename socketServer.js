@@ -5,11 +5,6 @@ const send_secsize = 1024;
 const ErrorBrokenTime = 20;
 const CheckCountBrokenTime = 3;
 const Max_BattleRoom = 1024;
-const playersCollection = 'players';
-const gamesCollection = 'games';
-const Game_Hour = 12;
-const Game_Minutes = 30;
-const Lv_Match = 28;
   
 var zlib = require('zlib');
 var util = require('util');
@@ -654,59 +649,8 @@ function netmsg_001_001(who) {
 		var teamID = ReadString(who);
 		var session = ReadString(who);
 		if (UsedSockets[who].TeamID == '') {
-			var query = {Identifier : teamID,};
-			var fields = {_id : 0,};
-	
-			gamedb.DBFindOne(playersCollection, query, fields, function(err, team) {
-				if (!err) {
-					if (team) {
-						if (team.sessionID == session) {
-							if (team.Lv >= Lv_Match) {
-								if (team.TeamName) {
-									var buf = WriteByteToBuffer(1);
-									
-									var now = new Date();
-									var hours = now.getUTCHours();
-									var min = now.getMinutes();
-									var ingame = 0;
-									if (hours == Game_Hour && min <= Game_Minutes)
-										ingame = 1;
-									
-									var ingameBuf = WriteByteToBuffer(ingame);
-									buf = Buffer.concat([buf, ingameBuf]);
-									
-									var buf2 = Get_RoomTeamList();
-									SendToClient(1, 1, who, Buffer.concat([buf, buf2]));
-									
-									//onclose delay, check reconnection
-									for (var i = 0; i < UsedSockets.length; i++)
-										if (UsedSockets[i].TeamID == teamID) {
-											UsedSockets[i].TeamID = '';
-											UsedSockets[i].TeamName = '';
-											UsedSockets[i].FightTeam = '';
-										}
-									
-									UsedSockets[who].TeamID = teamID;
-									UsedSockets[who].TeamName = team.TeamName;
-									UsedSockets[who].Popularity = team.Popularity;
-									UsedSockets[who].Conference = team.Conference;
-									UsedSockets[who].BasketLv = team.BasketLv;
-									UsedSockets[who].FightTeam = '';
-									
-									buf = WriteByteToBuffer(2);
-									buf2 = Get_TeamInformation(who);
-									SendToAllWithoutWho(1, 1, who, Buffer.concat([buf, buf2]));
-								} else
-									SendResultToClient(1, 1, 9, who);
-							} else
-								SendResultToClient(1, 1, 8, who);
-						} else
-							SendResultToClient(1, 1, 7, who);
-					} else 
-						SendResultToClient(1, 1, 6, who);
-				} else 
-					SendResultToClient(1, 1, 5, who);
-			});
+			UsedSockets[who].TeamID = teamID;
+			SendResultToClient(1, 1, 1, who);
 		} else 
 			SendResultToClient(1, 1, 4, who);
 	} catch (e) {
