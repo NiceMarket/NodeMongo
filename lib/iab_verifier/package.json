@@ -1,0 +1,53 @@
+{
+  "name": "iab_verifier",
+  "version": "0.1.2",
+  "description": "Google In App Billing Receipt Validation",
+  "keywords": [
+    "android",
+    "iab",
+    "in app billing",
+    "verifier",
+    "verify",
+    "verify android purchase",
+    "verify google purchase"
+  ],
+  "homepage": "https://github.com/ajones/iab_verifier",
+  "author": {
+    "name": "Aaron Jones"
+  },
+  "main": "./lib/iab_verifier",
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajones/iab_verifier.git"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "crypto": "*"
+  },
+  "readme": "# IABVerifier - Node.js verification library for Google Play products\n\n## Installation\n\nGrab from npm\n`npm install iab_verifier`\n\niab_verifier requires the 'crypto' module. The system should automatically grab this dependency for you. \n\n## Overview\n\niab_verifier takes 2 pieces of information from your Google IAB purchase flow and allows you to verify their authenticity on a remote server. These 2 pieces of info are the signed data blob and the signature both provided in a callback from the IABHelper service( usually in PurchaseCompleteAwaitingVerification).\n\n### Usage\n  \nWhen instantiating the verifier you need to provide the Google Play public key give to you through the <a href='https://play.google.com/apps/publish'>developer portal</a> under (App name) -> Services & APISs -> LICENSING & IN-APP BILLING\n\n#### To verify a receipt:\n\nJavascript:\n    \n    var IABVerifier = require('iab_verifier'),\n\n    var googleplay_public_key = \"-- YOUR PUBLIC KEY --\";\n    var googleplayVerifier = new IABVerifier(googleplay_public_key);\n\n    var receiptData = receiptDataFromClient;\n    var receiptSignature = signatureDataFromClient;\n\n    var isValid = googleplayVerifier.verifyReceipt(receiptData,receiptSignature);\n\n    if (isValid) {\n        // Receipt is valid. Grab a beer celebrate!\n    } else {\n        // Receipt is NOT valid... \n    }        \n       \n### License\n\nSee LICENSE file.\n",
+  "readmeFilename": "README.md",
+  "_id": "iab_verifier@0.1.2",
+  "dist": {
+    "shasum": "dade550ee389bbde8568b2f4ca71d5d11150095e",
+    "tarball": "http://registry.npmjs.org/iab_verifier/-/iab_verifier-0.1.2.tgz"
+  },
+  "_from": "iab_verifier@",
+  "_npmVersion": "1.2.15",
+  "_npmUser": {
+    "name": "ajones",
+    "email": "r.aaron.jones@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "ajones",
+      "email": "r.aaron.jones@gmail.com"
+    }
+  ],
+  "_shasum": "dade550ee389bbde8568b2f4ca71d5d11150095e",
+  "_resolved": "https://registry.npmjs.org/iab_verifier/-/iab_verifier-0.1.2.tgz"
+}

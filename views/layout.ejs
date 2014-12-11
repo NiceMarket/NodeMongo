@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>籃球黑幫</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Backend Manager">
+    <meta name="author" content="neoxuisme@gmail.com">
+    
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      media="screen"
+	  .wrap #mubox {
+		position: absolute;
+		left: -95px;
+		width: 190px;
+		height: 100%;
+		display: block;
+		background: #FFFFFF;
+	  }
+    </style>
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+  
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+	
+    <script src="assets/js/jquery.js"></script>
+  </head>
+
+  <body>      
+  
+  	<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">            
+            <ul class="nav">
+              <li><a href="/">Home</a></li>
+            </ul>   
+            <ul class="nav pull-right">   
+                <form class="navbar-form navbar-right" role="form" name="login" action="/login" method="post" enctype="multipart/form-data">
+                	<% if(!req.session.user){ %>
+			            <input type="text" name="email" class="form-control">
+			            <input type="password" name="password" class="form-control">
+			            <button type="submit" class="btn btn-success" value='login' >Sign in</button>
+			        <% } else { %>
+			        	<p style="top:6px;color:green;font-size:18px;"><%= req.session.user %></p>
+			        <% } %>
+		        </form>  
+			</ul>  
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
+	<div class="container-fluid">
+	    <%- body %>
+	    <hr>
+		<%- partial('footer') %>
+	</div><!--/.fluid-container-->
+
+    <!-- Le javascript    
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+     
+    <script src="assets/js/bootstrap.min.js"></script>   
+  </body>
+</html>

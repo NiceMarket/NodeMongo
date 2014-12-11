@@ -1,4 +1,8 @@
-NodeMongo
-=========
+Created with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
+ ([Eclipse Marketplace](http://marketplace.eclipse.org/content/nodeclipse), [site](http://www.nodeclipse.org))   
 
-Tutorial for Node.js + MongoDB
+Nodeclipse is free open-source project that grows with your contributions.
+
+(The NiceMarket License)
+
+Copyright (c) 2014 Neo Hsu <neoxuisme@gmail.com>
